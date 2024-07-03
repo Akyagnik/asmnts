@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Route, Routes } from 'react-router-dom';
+import { Grid } from '@mui/material';
+import Sidebar from './components/Sidebar';
+import CommandBar from './components/CommandBar';
+import Home from './pages/Home';
+import People from './pages/People';
+import Settings from './pages/Settings';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Grid container>
+        <Grid item xs={2}>
+          <Sidebar />
+        </Grid>
+        <Grid item xs={10}>
+          <CommandBar />
+          <Routes>
+            <Route exact path="/" components={<Home />}></Route>
+            <Route path="/people" components={<People />}></Route>
+            <Route path="/settings" components={<Settings />}></Route>
+          </Routes>
+        </Grid>
+      </Grid>
+    </Routes>
   );
 }
 
